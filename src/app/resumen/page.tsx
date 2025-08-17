@@ -1,10 +1,23 @@
-import React from "react";
+"use client";
 
-export default function page() {
+import { SelectDateC } from "@/components/SelectDateC";
+import React, { useState } from "react";
+
+export default function Page() {
+     const [firstDate, setFirstDate] = useState<Date | undefined>(undefined);
+     const [secondDate, setSecondDate] = useState<Date | undefined>(undefined);
+
      return (
-          <div>
-               <h1>Welcome to the Home Page</h1>
-               <p>This is the main content area.</p>
+          <div className="mx-50 mt-[50px]">
+               <div className="flex w-full  justify-between">
+                    <h1 className="font-bold text-3xl">Resumen</h1>
+
+                    {/* filtrar  */}
+                    <div className="flex gap-2">
+                         <SelectDateC className="w-[120px]" value={firstDate} onChange={setFirstDate} placeholder="Inicio" />
+                         <SelectDateC className="w-[120px]" value={secondDate} onChange={setSecondDate} placeholder="Fin" />
+                    </div>
+               </div>
           </div>
      );
 }
