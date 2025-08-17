@@ -27,9 +27,9 @@ export default function NavbarC() {
      ];
 
      return (
-          <nav className="flex justify-between h-[80px] px-8 border-b-1">
+          <nav className="flex justify-between h-[80px] px-50 border-b-1">
                <div className="flex items-center gap-2">
-                    <Image src="/icon.svg" alt="Logo" width={48} height={48} />
+                    <Image src="/icon.svg" alt="Logo" width={45} height={45} />
                     <a href="#" className="text-lg font-bold">
                          IassApp
                     </a>
@@ -40,7 +40,7 @@ export default function NavbarC() {
                          const isActive = pathname === link.href;
 
                          return (
-                              <a key={link.name} href={link.href} className={isActive ? "text-blue-500 font-bold" : ""}>
+                              <a key={link.name} href={link.href} className={isActive ? "text-black font-bold" : ""}>
                                    {link.name}
                               </a>
                          );
