@@ -1,5 +1,6 @@
 "use client";
 
+import { ConversationsTable } from "@/components/ConversationsTableC";
 import ResumeCardC from "@/components/ResumeCardC";
 import { SelectDateC } from "@/components/SelectDateC";
 import React, { useState } from "react";
@@ -41,10 +42,23 @@ export default function Page() {
                </div>
 
                {/* Tarjetas de resumen */}
-               <div className="mt-10 flex gap-4">
+               <div className="mt-5 flex gap-4">
                     {cards.map((card, index) => (
                          <ResumeCardC key={index} title={card.title} value={card.value} img={card.img} />
                     ))}
+               </div>
+
+               {/* Tabla con las conversaciones */}
+               {/* - Numero del cliente
+               - Producto
+               - Necesita intervención?
+               - Confirmación de compra
+               */}
+
+               {/* tabla */}
+               <div className="flex flex-col mt-10">
+                    <h2 className="text-xl font-semibold mb-4">Conversaciones recientes</h2>
+                    <ConversationsTable />
                </div>
           </div>
      );
