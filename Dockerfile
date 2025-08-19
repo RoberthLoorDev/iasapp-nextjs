@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copiar dependencias y hacer instalación
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copiar el resto del código y construir la app
 COPY . .
@@ -16,7 +16,7 @@ WORKDIR /app
 
 # Copiar dependencias de producción
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
 # Copiar los artefactos de build desde el builder
 COPY --from=builder /app/.next ./.next
