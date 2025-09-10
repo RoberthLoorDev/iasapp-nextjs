@@ -1,4 +1,3 @@
-import NavbarC from "@/components/NavbarC";
 import "./globals.css";
 
 export const metadata = {
@@ -9,10 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
      return (
           <html>
-               <body>
-                    <NavbarC />
-                    {children}
-               </body>
+               <body>{children}</body>
           </html>
      );
 }
