@@ -1,5 +1,4 @@
 import "./globals.css";
-import MainLayout from "../layout/MainLayout";
 
 export const metadata = {
      title: "Next.js",
@@ -9,9 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
      return (
           <html>
-               <body>
-                    <MainLayout>{children}</MainLayout>
-               </body>
+               <body>{children}</body>
           </html>
      );
 }
