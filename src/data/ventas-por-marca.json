@@ -1,0 +1,7 @@
+[
+     { "marca": "Xiaomi", "ventas": 14500 },
+     { "marca": "Samsung", "ventas": 17300 },
+     { "marca": "Huawei", "ventas": 9800 },
+     { "marca": "Apple", "ventas": 19200 },
+     { "marca": "Motorola", "ventas": 7200 }
+]

@@ -1,0 +1,32 @@
+[
+     {
+          "cliente": "Carlos Ruiz",
+          "telefono": "097111222",
+          "ultimoMensaje": "¿Aún tienes stock del Redmi Note 13?",
+          "fecha": "2025-09-11 14:32"
+     },
+     {
+          "cliente": "María Gómez",
+          "telefono": "098765432",
+          "ultimoMensaje": "¿Aceptan pago con transferencia?",
+          "fecha": "2025-09-11 13:10"
+     },
+     {
+          "cliente": "Juan Pérez",
+          "telefono": "099123456",
+          "ultimoMensaje": "¿Cuánto tiempo de garantía tiene el iPhone?",
+          "fecha": "2025-09-11 12:45"
+     },
+     {
+          "cliente": "Ana López",
+          "telefono": "096333444",
+          "ultimoMensaje": "Me interesa el Magic 7 Lite, ¿lo envían a Quito?",
+          "fecha": "2025-09-10 18:20"
+     },
+     {
+          "cliente": "Luis Fernández",
+          "telefono": "095555666",
+          "ultimoMensaje": "¿Tienen plan de pago en cuotas?",
+          "fecha": "2025-09-10 17:05"
+     }
+]
