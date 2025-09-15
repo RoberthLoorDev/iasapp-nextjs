@@ -52,7 +52,7 @@ export default function SlideBarC() {
 
      return (
           <div
-               className={`bg-sidebar-background text-white flex flex-col p-4 transition-all duration-300 ease-in-out ${
+               className={`fixed top-0 left-0 z-50 min-h-full bg-sidebar-background text-white flex flex-col p-4 transition-all duration-300 ease-in-out ${
                     isCollapsed ? "w-20" : "w-64"
                }`}
           >
