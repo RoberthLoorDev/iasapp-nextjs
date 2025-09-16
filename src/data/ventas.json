@@ -1,0 +1,95 @@
+[
+     {
+          "id": "1",
+          "createdAt": "2023-09-10",
+          "invoiceNumber": "INV-001",
+          "customerName": "Juan Pérez",
+          "customerCedula": "1234567890",
+          "customerPhone": "0999999999",
+          "subtotal": 1200,
+          "ivaAmount": 192,
+          "total": 1392,
+          "paymentMethod": "Tarjeta",
+          "status": "completed",
+          "items": [
+               {
+                    "id": "i1",
+                    "product": {
+                         "id": "p1",
+                         "brand": "Samsung",
+                         "model": "Galaxy S23",
+                         "variant": "Ultra"
+                    },
+                    "quantity": 1,
+                    "unitPrice": 1000,
+                    "subtotal": 1000
+               },
+               {
+                    "id": "i2",
+                    "product": {
+                         "id": "p2",
+                         "brand": "Xiaomi",
+                         "model": "Mi 13",
+                         "variant": "Pro"
+                    },
+                    "quantity": 1,
+                    "unitPrice": 200,
+                    "subtotal": 200
+               }
+          ]
+     },
+     {
+          "id": "2",
+          "createdAt": "2023-09-12",
+          "invoiceNumber": "INV-002",
+          "customerName": "Ana López",
+          "customerCedula": "1098765432",
+          "customerPhone": "0988888888",
+          "subtotal": 700,
+          "ivaAmount": 112,
+          "total": 812,
+          "paymentMethod": "Efectivo",
+          "status": "pending",
+          "items": [
+               {
+                    "id": "i3",
+                    "product": {
+                         "id": "p3",
+                         "brand": "Apple",
+                         "model": "iPhone 14",
+                         "variant": "Pro Max"
+                    },
+                    "quantity": 1,
+                    "unitPrice": 700,
+                    "subtotal": 700
+               }
+          ]
+     },
+     {
+          "id": "3",
+          "createdAt": "2023-09-14",
+          "invoiceNumber": "INV-003",
+          "customerName": "Carlos Ruiz",
+          "customerCedula": "1022334455",
+          "customerPhone": "0977777777",
+          "subtotal": 2000,
+          "ivaAmount": 320,
+          "total": 2320,
+          "paymentMethod": "Transferencia",
+          "status": "cancelled",
+          "items": [
+               {
+                    "id": "i4",
+                    "product": {
+                         "id": "p1",
+                         "brand": "Samsung",
+                         "model": "Galaxy S23",
+                         "variant": "Ultra"
+                    },
+                    "quantity": 2,
+                    "unitPrice": 1000,
+                    "subtotal": 2000
+               }
+          ]
+     }
+]

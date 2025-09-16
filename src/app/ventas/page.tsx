@@ -1,9 +1,10 @@
-import React from "react";
+import SalesTable from "@/components/SalesTable";
+import MainLayout from "@/layout/MainLayout";
 
 export default function page() {
      return (
-          <div>
-               Ventas
+          <MainLayout title="Ventas">
+               <SalesTable />
                {/* 4) Ventas (registro y listado)
                     Objetivo: registrar ventas con línea(s) de producto y ver historial básico.
                 */}
@@ -32,6 +33,6 @@ export default function page() {
                     •	Ver detalle: muestra SaleItem[] con Product.brand/model, cantidad y precios.
 
                */}
-          </div>
+          </MainLayout>
      );
 }
