@@ -213,7 +213,7 @@ export function EditProductDialog({ product }: { product: Product }) {
                                    Cancelar
                               </Button>
                          </DialogClose>
-                         <Button type="submit" className="bg-black text-white hover:bg-gray-800">
+                         <Button variant="default" type="submit" className="text-white hover:bg-gray-800">
                               Guardar
                          </Button>
                     </DialogFooter>
