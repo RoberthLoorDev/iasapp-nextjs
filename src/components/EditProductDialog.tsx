@@ -15,25 +15,7 @@ import { Input } from "@/shadcn/components/ui/input";
 import { Label } from "@/shadcn/components/ui/label";
 import { Textarea } from "@/shadcn/components/ui/textarea";
 import { Edit } from "lucide-react";
-
-type Product = {
-     id: string;
-     brand: string;
-     model: string;
-     variant?: string;
-     ram: string;
-     storage: string;
-     processor?: string;
-     display?: string;
-     mainCameraMp?: number;
-     frontCameraMp?: number;
-     batteryMah?: number;
-     features?: string;
-     price: number;
-     stock: number;
-     description?: string;
-     imageUrl?: string;
-};
+import { Product } from "@/types/productosTypes";
 
 export function EditProductDialog({ product }: { product: Product }) {
      return (

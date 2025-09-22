@@ -14,15 +14,7 @@ import {
 import { Button } from "@/shadcn/components/ui/button";
 import { Label } from "@/shadcn/components/ui/label";
 import { Trash2 } from "lucide-react";
-
-type Product = {
-     id: string;
-     brand: string;
-     model: string;
-     variant?: string;
-     price: number;
-     stock: number;
-};
+import { Product } from "@/types/productosTypes";
 
 export function DeleteProductDialog({ product }: { product: Product }) {
      const [countdown, setCountdown] = useState(7);
