@@ -1,85 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
+import useProductsHook from "@/hooks/useProductsHook";
+import { Badge } from "@/shadcn/components/ui/badge";
 import { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
-import { Badge } from "@/shadcn/components/ui/badge";
-import { Edit, Trash2, Copy, Search, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
-import { EditProductDialog } from "./EditProductDialog";
-import { DeleteProductDialog } from "./DeleteProductDialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
+import { ChevronLeft, ChevronRight, Search, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 import { CreateProductDialog } from "./CreateProductDialog";
-
-type Product = {
-     id: string;
-     brand: string;
-     model: string;
-     variant: string;
-     ram: string;
-     storage: string;
-     price: number;
-     stock: number;
-     camera: number;
-     battery: number;
-     updatedAt: string;
-};
-
-const sampleProducts: Product[] = [
-     {
-          id: "1",
-          brand: "Samsung",
-          model: "Galaxy S23",
-          variant: "Ultra",
-          ram: "12GB",
-          storage: "256GB",
-          price: 1199,
-          stock: 8,
-          camera: 200,
-          battery: 5000,
-          updatedAt: "2023-09-10",
-     },
-     {
-          id: "2",
-          brand: "Xiaomi",
-          model: "Mi 13",
-          variant: "Pro",
-          ram: "8GB",
-          storage: "128GB",
-          price: 699,
-          stock: 2,
-          camera: 50,
-          battery: 4600,
-          updatedAt: "2023-08-28",
-     },
-     {
-          id: "3",
-          brand: "Apple",
-          model: "iPhone 14",
-          variant: "Pro Max",
-          ram: "6GB",
-          storage: "512GB",
-          price: 1399,
-          stock: 5,
-          camera: 48,
-          battery: 4300,
-          updatedAt: "2023-09-01",
-     },
-];
+import { DeleteProductDialog } from "./DeleteProductDialog";
+import { EditProductDialog } from "./EditProductDialog";
 
 export default function ProductsTable() {
-     const [query, setQuery] = useState("");
+     const businessId = "fe1528c0-81bc-4a57-a1b0-9fe45860c6d0";
      const [page, setPage] = useState(1);
-     const pageSize = 2; // demo: 2 productos por página
+     const [limit] = useState(10);
+     const [query, setQuery] = useState("");
 
-     const filtered = sampleProducts.filter(
-          (p) =>
-               p.brand.toLowerCase().includes(query.toLowerCase()) ||
-               p.model.toLowerCase().includes(query.toLowerCase()) ||
-               p.variant.toLowerCase().includes(query.toLowerCase())
-     );
-
-     const totalPages = Math.ceil(filtered.length / pageSize);
-     const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
+     const { data, isLoading, error } = useProductsHook(businessId, page, limit, query);
+     if (isLoading) return <div>Cargando...</div>;
+     if (error) return <div>Error: {error.message}</div>;
 
      return (
           <div className="space-y-4">
@@ -116,7 +56,7 @@ export default function ProductsTable() {
                               </TableRow>
                          </TableHeader>
                          <TableBody>
-                              {paginated.map((p) => (
+                              {data?.data.map((p) => (
                                    <TableRow key={p.id} className="border-0 hover:bg-gray-50 transition-colors">
                                         <TableCell className="font-medium py-1.5 pl-5">{p.brand}</TableCell>
                                         <TableCell className="py-1.5">{p.model}</TableCell>
@@ -138,8 +78,8 @@ export default function ProductsTable() {
                                                   </Badge>
                                              )}
                                         </TableCell>
-                                        <TableCell className="py-1.5">{p.camera} MP</TableCell>
-                                        <TableCell className="py-1.5">{p.battery} mAh</TableCell>
+                                        <TableCell className="py-1.5">{p.mainCameraMp} MP</TableCell>
+                                        <TableCell className="py-1.5">{p.batteryMah} mAh</TableCell>
                                         <TableCell className="py-1.5">
                                              <div className="flex justify-center gap-2">
                                                   <EditProductDialog product={p} />
@@ -160,7 +100,7 @@ export default function ProductsTable() {
 
                {/* Footer con total y paginación */}
                <div className="mt-4 space-y-2">
-                    <span className="text-sm text-black block">Total registros: {filtered.length}</span>
+                    <span className="text-sm text-black block">Total registros: {data?.meta.total}</span>
                     <div className="flex justify-center items-center gap-2">
                          <Button
                               variant="ghost"
@@ -172,14 +112,14 @@ export default function ProductsTable() {
                               <ChevronLeft className="h-4 w-4 text-black" />
                          </Button>
                          <span className="text-sm text-black">
-                              Página {page} de {totalPages}
+                              Página {data?.meta.currentPage} de {data?.meta.totalPages}
                          </span>
                          <Button
                               variant="ghost"
                               size="icon"
                               className="border border-[#EFEFEF] rounded-md hover:bg-gray-100"
-                              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                              disabled={page === totalPages}
+                              onClick={() => setPage((p) => Math.min(data?.meta.totalPages ?? 1, p + 1))}
+                              disabled={page === data?.meta.totalPages}
                          >
                               <ChevronRight className="h-4 w-4 text-black" />
                          </Button>
