@@ -8,16 +8,16 @@ export const api = axios.create({
 // Add a request interceptor
 api.interceptors.request.use(
      (config) => {
-          // token
-          const token =
-               localStorage.getItem("token") ||
-               "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZTE1MjhjMC04MWJjLTRhNTctYTFiMC05ZmU0NTg2MGM2ZDAiLCJlbWFpbCI6InJvYmVydGhnbWVyQGdtYWlsLmNvbSIsIm5hbWUiOiJUSUVOREEgREUgUFJVRUJBUyIsImlhdCI6MTc1ODU0NzY5NiwiZXhwIjoxNzU4NTc2NDk2fQ.cwV3xt-D0IQ4BN3j5ViKuH8_Hhp-zR6-C1olOJn26qA";
+          // no agregar token en login
+          if (!config.url?.includes("/auth")) {
+               const token = localStorage.getItem("token");
 
-          if (token) {
-               if (!config.headers) {
-                    config.headers = {};
+               if (token) {
+                    config.headers = {
+                         ...config.headers,
+                         Authorization: `Bearer ${token}`,
+                    };
                }
-               config.headers.Authorization = `Bearer ${token}`;
           }
 
           return config;
@@ -29,20 +29,51 @@ api.interceptors.request.use(
 
 // Add a response interceptor
 api.interceptors.response.use(
-     (response) => {
-          return response;
-     },
+     (response) => response,
      (error) => {
-          if (error.response?.status === 401) {
-               // token expired
+          const isLoginRequest = error.config?.url?.includes("/auth/login");
+
+          if (error.response?.status === 401 && !isLoginRequest) {
                console.warn("Unauthorized! Redirecting to login...");
                localStorage.removeItem("token");
                window.location.href = "/login";
           }
 
-          // logs error dev
           if (process.env.NODE_ENV === "development") {
                console.error("API Error:", error.response || error.message);
+          }
+
+          return Promise.reject(error);
+     }
+);
+
+api.interceptors.request.use(
+     (config) => {
+          // no agregar token a login/register
+          if (!config.url?.includes("/auth/")) {
+               const token = localStorage.getItem("token");
+               if (token) {
+                    config.headers = {
+                         ...config.headers,
+                         Authorization: `Bearer ${token}`,
+                    };
+               }
+          }
+          return config;
+     },
+     (error) => Promise.reject(error)
+);
+
+api.interceptors.response.use(
+     (response) => response,
+     (error) => {
+          if (process.env.NODE_ENV === "development") {
+               console.error("❌ API Error:");
+               console.error("URL:", error.config?.url);
+               console.error("Method:", error.config?.method);
+               console.error("Status:", error.response?.status);
+               console.error("Data:", error.response?.data);
+               console.error("Message:", error.message);
           }
 
           return Promise.reject(error);
