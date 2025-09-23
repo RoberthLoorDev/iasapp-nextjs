@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Providers } from "../providers/Providers";
+import { Toaster } from "sonner";
 
 export const metadata = {
      title: "Next.js",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <html lang="es">
                <body>
                     <Providers>{children}</Providers>
+                    <Toaster richColors position="top-center" />
                </body>
           </html>
      );
