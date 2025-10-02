@@ -15,7 +15,7 @@ import { Label } from "@/shadcn/components/ui/label";
 import { Textarea } from "@/shadcn/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateProductForm, createProductSchema } from "../schemas/productSchema";
+import { createProductSchema, CreateProductForm } from "../schemas/productSchema";
 import useCreateProduct from "@/hooks/useCreateProduct";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ export function CreateProductDialog() {
           handleSubmit,
           formState: { errors },
           reset, // Agregamos reset para limpiar el formulario
-     } = useForm<CreateProductForm>({
+     } = useForm({
           resolver: zodResolver(createProductSchema),
           defaultValues: {
                brand: "",

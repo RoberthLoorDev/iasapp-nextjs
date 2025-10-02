@@ -17,8 +17,11 @@ export const createProductSchema = z.object({
      features: z.string().optional(),
      price: z.number().min(0, "El precio debe ser mayor o igual a 0"),
      stock: z.number().min(0, "El stock debe ser mayor o igual a 0"),
-     description: z.string().optional(),
-     imageUrl: z.string().url("Debe ser una URL válida").optional(),
+          description: z.string().optional(),
+          // Permitir cadena vacía: la preprocesamos a undefined para que la validación
+          // de URL no falle cuando el campo esté vacío en el formulario.
+          imageUrl: z.preprocess((val) => (typeof val === "string" && val.trim() === "" ? undefined : val),
+               z.string().url("Debe ser una URL válida").optional()),
 });
 
 export type CreateProductForm = z.infer<typeof createProductSchema> & {
